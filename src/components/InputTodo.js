@@ -1,23 +1,29 @@
-import React, { Component } from "react"
+import React, { Component } from 'react';
 
 class InputTodo extends Component {
-  state = {
-    title: ""
-  };
-  onChange = e => {
+  constructor (props){
+    super(props);
+    this.state = {
+      title: '',
+    };
+  }
+
+  onChange = (e) => {
     this.setState({
-      title: e.target.value
+      title: e.target.value,
     });
   };
+
+  
+
   handleSubmit = e => {
+    const {title} = this.state.title;
     e.preventDefault()
-    if (this.state.title.trim()) {
-      this.props.addTodoProps(this.state.title)
+    if (title.trim()) {
+      this.props.addTodoProps(title);
       this.setState({
-        title: "",
+        title: '',
       })
-    } else {
-      alert("Please write item")
     }
   };
   render() {
