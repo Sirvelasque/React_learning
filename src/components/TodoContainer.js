@@ -3,6 +3,7 @@ import TodosList from "./todosList";
 import Header from "./Header"
 import InputTodo from "./InputTodo"
 import { v4 as uuidv4 } from "uuid";
+import { Route, Switch } from "react-router-dom"
 
 class TodoContainer extends React.Component {
   state = {
@@ -61,12 +62,13 @@ class TodoContainer extends React.Component {
 
    render() {
     return (
-      <div className="container">
-        <div className="inner">
-          <Header />
-          <InputTodo
-            addTodoProps={this.addTodoItem}
-          />
+      <Route path="/">
+        <div className="container">
+          <div className="inner">
+            <Header />
+            <InputTodo
+              addTodoProps={this.addTodoItem}
+            />
           <TodosList
             todos={this.state.todos}
             changeProp={this.handleChange}
@@ -74,6 +76,7 @@ class TodoContainer extends React.Component {
           />
         </div>
       </div>
+      </Route>
     );
   }
 }
