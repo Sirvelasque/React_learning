@@ -1,21 +1,33 @@
-import React from "react"
-import TodoItem from "./TodoItem"
+import React from 'react';
+import PropTypes from 'prop-types';
+import TodoItem from './TodoItem';
 
-class TodosList extends React.Component {
+class TodosList extends React.PureComponent {
   render() {
+    const { todos, changeProp, deleteProp } = this.props;
+    const info = todos;
     return (
       <ul>
-        {this.props.todos.map(todo => (
+        {info.map((todo) => (
           <TodoItem
-          key={todo.id}
-          todo={todo}
-          changeProp={this.props.changeProp}
-          delete={this.props.delete}
+            key={todo.id}
+            todo={todo}
+            changeProp={changeProp}
+            deleteProp={deleteProp}
           />
         ))}
       </ul>
-    )
+    );
   }
 }
 
-export default TodosList
+TodosList.propTypes = {
+  todos: PropTypes.shape(PropTypes.shape({
+    id: PropTypes.string,
+    completed: PropTypes.bool,
+    title: PropTypes.string,
+  })).isRequired,
+  changeProp: PropTypes.func.isRequired,
+  deleteProp: PropTypes.func.isRequired,
+};
+export default TodosList;
